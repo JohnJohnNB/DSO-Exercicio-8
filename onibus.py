@@ -12,16 +12,16 @@ class Onibus(AbstractOnibus):
         self.__ligado = ligado
 
     def ligar(self) -> str:
-        pass
+        raise OnibusJahLigadoException
 
     def desligar(self) -> str:
-        pass
+        raise OnibusJahDesligadoException
 
     def embarca_pessoa(self) -> str:
-        pass
+        raise OnibusJahCheioException
 
     def desembarca_pessoa(self) -> str:
-        pass
+        raise OnibusJahVazioException
 
     @property
     def capacidade(self) -> int:

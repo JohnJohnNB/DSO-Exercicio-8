@@ -4,13 +4,12 @@ from onibus import Onibus
 
 
 class ControladorOnibus(AbstractControladorOnibus):
-    def __init__(self):
+    def __init__(self, capacidade, total_passageiros, ligado):
         super().__init__()
-        self.__onibus = None
+        self.__onibus = self.inicializar_onibus(capacidade, total_passageiros, ligado)
 
     def ligar(self) -> str:
-        if self.__onibus.ligado:
-            self.__onibus.ligar()
+        pass
 
     def desligar(self) -> str:
         pass
@@ -25,4 +24,11 @@ class ControladorOnibus(AbstractControladorOnibus):
     def onibus(self) -> Onibus:
         return self.__onibus
 
-
+    def inicializar_onibus(self, capacidade: int, total_passageiros: int, ligado: bool):
+        if isinstance(capacidade, int) and isinstance(total_passageiros, int) and isinstance(ligado, bool):
+            if capacidade < 0 or total_passageiros < 0 or total_passageiros > capacidade or not ligado:
+                raise ComandoInvalidoException
+            onibus = Onibus(capacidade, total_passageiros, ligado)
+            return onibus
+        else:
+            raise ComandoInvalidoException
