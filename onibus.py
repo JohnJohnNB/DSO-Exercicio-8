@@ -12,16 +12,28 @@ class Onibus(AbstractOnibus):
         self.__ligado = ligado
 
     def ligar(self) -> str:
-        raise OnibusJahLigadoException
+        if self.__ligado:
+            raise OnibusJahLigadoException
+        else:
+            self.__ligado = True
 
     def desligar(self) -> str:
-        raise OnibusJahDesligadoException
+        if not self.__ligado:
+            raise OnibusJahDesligadoException
+        else:
+            self.__ligado = False
 
     def embarca_pessoa(self) -> str:
-        raise OnibusJahCheioException
+        if self.__total_passageiros >= self.__capacidade:
+            raise OnibusJahCheioException
+        else:
+            self.__total_passageiros += 1
 
     def desembarca_pessoa(self) -> str:
-        raise OnibusJahVazioException
+        if self.__total_passageiros == 0:
+            raise OnibusJahVazioException
+        else:
+            self.__total_passageiros -= 1
 
     @property
     def capacidade(self) -> int:
